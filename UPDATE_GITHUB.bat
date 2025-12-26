@@ -4,7 +4,7 @@ echo ========================================================
 echo       GITHUB SITE UPDATER
 echo ========================================================
 echo.
-echo This script will upload your latest changes to GitHub.
+echo Uploading changes to: https://github.com/y5467dqt5q-ai/my-token-website
 echo.
 
 :: Check if git is installed
@@ -27,32 +27,26 @@ echo Adding files...
 git add .
 git commit -m "Update site: mobile support, marketing banner, presale config"
 
-:: Check remote
-git remote get-url origin >nul 2>nul
-if %ERRORLEVEL% NEQ 0 (
-    echo.
-    echo We need to link your GitHub repository.
-    echo Please enter your GitHub Repository URL 
-    echo (Example: https://github.com/YourName/your-repo.git)
-    echo.
-    set /p REPO_URL="Repository URL: "
-    git remote add origin %REPO_URL%
-) else (
-    echo Repository already linked.
-)
+:: Set Remote
+echo Setting remote repository...
+git remote remove origin >nul 2>nul
+git remote add origin https://github.com/y5467dqt5q-ai/my-token-website.git
 
 :: Push
 echo.
 echo Uploading to GitHub...
+echo (A window may open asking you to sign in to GitHub)
 git push -u origin main --force
 
 if %ERRORLEVEL% EQU 0 (
     echo.
     echo ✅ SUCCESS! Your site is updating.
-    echo Changes will be live in 1-2 minutes.
+    echo Changes will be live in 1-2 minutes at:
+    echo https://y5467dqt5q-ai.github.io/my-token-website/
 ) else (
     echo.
-    echo ❌ ERROR. Please check your internet or permissions.
+    echo ❌ ERROR. Could not upload.
+    echo NOTE: If you are signed in as 'Roman-tarasovv', please sign out or switch to 'y5467dqt5q-ai'.
 )
 
 pause
